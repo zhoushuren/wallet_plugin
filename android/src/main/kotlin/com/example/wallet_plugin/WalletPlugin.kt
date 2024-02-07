@@ -8,6 +8,9 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
+
+
+
 /** WalletPlugin */
 class WalletPlugin: FlutterPlugin, MethodCallHandler {
   /// The MethodChannel that will the communication between Flutter and native Android
@@ -23,8 +26,11 @@ class WalletPlugin: FlutterPlugin, MethodCallHandler {
 
   override fun onMethodCall(call: MethodCall, result: Result) {
     if (call.method == "getPlatformVersion") {
+
       result.success("Android ${android.os.Build.VERSION.RELEASE}")
-    } else {
+    }else if (call.method == "getMnemonic") {
+
+    }else {
       result.notImplemented()
     }
   }
