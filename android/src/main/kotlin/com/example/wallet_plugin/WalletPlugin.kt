@@ -8,6 +8,7 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
+import hunterwallet.Hunterwallet
 
 
 
@@ -29,7 +30,7 @@ class WalletPlugin: FlutterPlugin, MethodCallHandler {
 
       result.success("Android ${android.os.Build.VERSION.RELEASE}")
     }else if (call.method == "getMnemonic") {
-
+      result.success(Hunterwallet.generateMnemonic())
     }else {
       result.notImplemented()
     }

@@ -1,15 +1,13 @@
 group 'com.example.wallet_plugin'
 version '1.0-SNAPSHOT'
 
+
 buildscript {
     ext.kotlin_version = '1.7.10'
     repositories {
         google()
         mavenCentral()
-
-        flatDir {
-            dirs 'libs'
-        }
+        mavenLocal()
     }
 
     dependencies {
@@ -22,9 +20,8 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        flatDir {
-            dirs 'libs'
-        }
+        mavenLocal()
+
     }
 }
 
@@ -32,7 +29,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdk 34
+    compileSdk 32
     if (project.android.hasProperty("namespace")) {
         namespace 'com.example.wallet_plugin'
     }
@@ -53,14 +50,19 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 20
     }
 
     dependencies {
-        testImplementation 'org.jetbrains.kotlin:kotlin-test'
-        testImplementation 'org.mockito:mockito-core:5.0.0'
-        implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-//        implementation(name: 'hunterwallet', ext: 'aar')
+
+        implementation("com.brave:hunterwallet:1.0.0")
+
+//        testImplementation 'org.jetbrains.kotlin:kotlin-test'
+//        testImplementation 'org.mockito:mockito-core:5.0.0'
+        // implementation 'com.brave:hunterwallet:1.0.0'
+
+        // implementation files('libs/hunterwallet.aar')
+
     }
 
     testOptions {
@@ -68,12 +70,12 @@ android {
             useJUnitPlatform()
 
             testLogging {
-               events "passed", "skipped", "failed", "standardOut", "standardError"
-               outputs.upToDateWhen {false}
-               showStandardStreams = true
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen {false}
+                showStandardStreams = true
             }
         }
     }
 
-    ndkVersion '25.2.9519653'
+    ndkVersion '20'
 }
